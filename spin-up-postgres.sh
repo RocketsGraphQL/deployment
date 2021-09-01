@@ -1,0 +1,1 @@
+postgres -D ./postgres_conf/ >logfile 2>&1 &
