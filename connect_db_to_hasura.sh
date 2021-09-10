@@ -16,4 +16,4 @@ curl -d '{
     }
   }
 }
-' -H "Content-Type: application/json" -X POST http://localhost:8080//v1/metadata
+' -H "Content-Type: application/json" -X POST http://localhost:8080/v1/metadata
