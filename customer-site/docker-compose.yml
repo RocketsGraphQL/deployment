@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  customer-site-fe:
+    image: rocketsgraphql/customer-site-fe:latest
+    restart: always
+    ports:
+      - "80:90"
+    depends_on:
+      - "customer-site-be"
+    links:
+      - "customer-site-be"
+  customer-site-be:
+    image: rocketsgraphql/customer-site-backend:latest
+    ports:
+      - "5000:5000"
+    restart: always
