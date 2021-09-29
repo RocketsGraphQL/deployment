@@ -1,4 +1,4 @@
-docker-compose up -d
+# docker-compose up -d
 
 # Wait for the hasura to be up
 bash -c 'while [[ "$(curl http://localhost:8080/healthz)" != "OK" ]]; do sleep 5; done'
@@ -22,7 +22,10 @@ curl -d '{
     }
   }
 }
-' -H "Content-Type: application/json" -X POST http://localhost:8080/v1/metadata
+' -H "Content-Type: application/json" \
+  -H "X-Hasura-Role: admin" \
+  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -X POST http://localhost:8080/v1/metadata
 
 # Create table
 curl -d '
@@ -32,10 +35,13 @@ curl -d '
         "args": {
             "source": "postgres",
             "cascade": true,
-            "sql": "CREATE TABLE users(id uuid NOT NULL DEFAULT gen_random_uuid(), name text NOT NULL, email text NOT NULL, passwordhash text NOT NULL, PRIMARY KEY (id));"
+            "sql": "CREATE TABLE users(id serial NOT NULL, name text NOT NULL, email text NOT NULL, passwordhash text NOT NULL, PRIMARY KEY (id));"
         }
     }
-' -H "Content-Type: application/json" -X POST http://localhost:8080/v2/query
+' -H "Content-Type: application/json" \
+  -H "X-Hasura-Role: admin" \
+  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -X POST http://localhost:8080/v2/query
 
 
 # Track table
@@ -57,4 +63,7 @@ curl -d '
             }
         ]
     }
-' -H "Content-Type: application/json" -X POST http://localhost:8080/v1/metadata
+' -H "Content-Type: application/json" \
+  -H "X-Hasura-Role: admin" \
+  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -X POST http://localhost:8080/v1/metadata
