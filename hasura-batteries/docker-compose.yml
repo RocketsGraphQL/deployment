@@ -26,6 +26,7 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
       HASURA_GRAPHQL_JWT_SECRET: '{
         "type": "HS256",
         "key": "If it is able to parse any of the above successfully, then it will use that parsed time to refresh/refetch the JWKs again. If it is unable to parse, then it will not refresh the JWKs"
