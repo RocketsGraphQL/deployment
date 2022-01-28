@@ -4,13 +4,13 @@ services:
     image: rocketsgraphql/customer-site-fe:latest
     restart: always
     ports:
-      - "80:90"
+      - "9001:90"
     depends_on:
       - "customer-site-be"
     links:
       - "customer-site-be"
   customer-site-be:
-    image: rocketsgraphql/customer-site-backend:latest
+    image: rocketsgraphql/customer-site-be:latest
     ports:
       - "5000:5000"
     restart: always
@@ -19,3 +19,4 @@ services:
     ports:
       - "3000:3000"
     restart: always
+
