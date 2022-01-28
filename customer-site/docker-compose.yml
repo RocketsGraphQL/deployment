@@ -15,6 +15,9 @@ services:
       - "5000:5000"
     restart: always
   customer-site-docs:
+    # https://github.com/nuxt/nuxt.js/issues/291
+    environment:
+      - HOST=0.0.0.0
     image: rocketsgraphql/customer-site-docs:latest
     ports:
       - "3000:3000"
