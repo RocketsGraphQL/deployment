@@ -10,3 +10,7 @@ hasura-endpoint.rocketgraph.io {
 blog.rocketgraph.io {
   reverse_proxy * localhost:3001
 }
+
+docs.rocketgraph.io {
+  reverse_proxy * localhost:3000
+}
