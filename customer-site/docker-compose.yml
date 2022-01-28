@@ -4,7 +4,7 @@ services:
     image: rocketsgraphql/customer-site-fe:latest
     restart: always
     ports:
-      - "80:90"
+      - "9001:90"
     depends_on:
       - "customer-site-be"
     links:
