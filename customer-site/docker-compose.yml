@@ -17,5 +17,5 @@ services:
   customer-site-docs:
     image: rocketsgraphql/customer-site-docs:latest
     ports:
-      - "4000:4000"
+      - "3000:3000"
     restart: always

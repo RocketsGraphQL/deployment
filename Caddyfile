@@ -1,0 +1,8 @@
+rocketsgraphql.com {
+  reverse_proxy * localhost:9001
+  reverse_proxy /api/* localhost:5000
+}
+
+hasura-endpoint.rocketsgraphql.com {
+  reverse_proxy * localhost:8080
+}
