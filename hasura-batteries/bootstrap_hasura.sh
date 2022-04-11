@@ -54,7 +54,7 @@ curl -d '
         "args": {
             "source": "postgres",
             "cascade": true,
-            "sql": "CREATE TABLE providers(id uuid NOT NULL DEFAULT gen_random_uuid(), user_id uuid NOT NULL, provider text NOT NULL, CONSTRAINT fk_users FOREIGN_KEY(user_id) REFERENCES users(id), PRIMARY KEY (id));"
+            "sql": "CREATE TABLE providers(id uuid NOT NULL DEFAULT gen_random_uuid(), user_id uuid NOT NULL, provider text NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, CONSTRAINT fk_users FOREIGN_KEY(user_id) REFERENCES users(id), PRIMARY KEY (id));"
         }
     }
 ' -H "Content-Type: application/json" \
@@ -85,6 +85,7 @@ curl -d '
   -H "X-Hasura-Role: admin" \
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v1/metadata
+
 
 # Track table
 curl -d '
