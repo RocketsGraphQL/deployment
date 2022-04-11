@@ -27,7 +27,7 @@ curl -d '{
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v1/metadata
 
-# Create table
+# Create users table
 curl -d '
     {
         "type": "run_sql",
@@ -43,6 +43,24 @@ curl -d '
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v2/query
 
+# create providers table
+# with one to many on users
+# for various login methods
+
+curl -d '
+    {
+        "type": "run_sql",
+        "source": "postgres",
+        "args": {
+            "source": "postgres",
+            "cascade": true,
+            "sql": "CREATE TABLE providers(id uuid NOT NULL DEFAULT gen_random_uuid(), user_id uuid NOT NULL, provider text NOT NULL, CONSTRAINT fk_users FOREIGN_KEY(user_id) REFERENCES users(id), PRIMARY KEY (id));"
+        }
+    }
+' -H "Content-Type: application/json" \
+  -H "X-Hasura-Role: admin" \
+  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -X POST http://localhost:8080/v2/query
 
 # Track table
 curl -d '
@@ -56,6 +74,30 @@ curl -d '
                 "args":{
                     "table":{
                         "name":"users",
+                        "schema":"public"
+                    },
+                    "source":"postgres"
+                }
+            }
+        ]
+    }
+' -H "Content-Type: application/json" \
+  -H "X-Hasura-Role: admin" \
+  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -X POST http://localhost:8080/v1/metadata
+
+# Track table
+curl -d '
+    {
+        "type":"bulk",
+        "source":"postgres",
+        "resource_version":2,
+        "args":[
+            {
+                "type":"pg_track_table",
+                "args":{
+                    "table":{
+                        "name":"providers",
                         "schema":"public"
                     },
                     "source":"postgres"
