@@ -110,3 +110,47 @@ curl -d '
   -H "X-Hasura-Role: admin" \
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v1/metadata
+
+# Create array relationship
+# providers.user_id -> user.id
+# curl -d '
+#     {
+#       "type": "pg_create_object_relationship",
+#       "args": {
+#         "source": "postgres",
+#         "table": "providers",
+#         "name": "user",
+#         "using": {
+#            "foreign_key_constraint_on": "user_id"
+#         }
+#       }
+#     }
+# ' -H "Content-Type: application/json" \
+#   -H "X-Hasura-Role: admin" \
+#   -H "X-hasura-admin-secret: myadminsecretkey" \
+#   -X POST http://localhost:8080/v1/metadata
+
+
+# Track relationship
+curl -d '
+    {
+        "type":"bulk",
+        "source":"postgres",
+        "args":[
+            {
+              "type": "pg_create_object_relationship",
+              "args": {
+                "source": "postgres",
+                "table": "providers",
+                "name": "user",
+                "using": {
+                  "foreign_key_constraint_on": "user_id"
+                }
+              }
+            }
+        ]
+    }
+' -H "Content-Type: application/json" \
+  -H "X-Hasura-Role: admin" \
+  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -X POST http://localhost:8080/v1/metadata
