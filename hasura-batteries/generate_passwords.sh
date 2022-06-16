@@ -7,8 +7,10 @@ for i in `seq 1 $n`; do
 done
 echo $postgres_password
 
+dir=$PWD
+
 # randomly generated 10 char postgres password
-sed -i '.bak' "s/kaushik_replace_postgrespassword/$postgres_password/g" docker-compose.yml
+sed -i '.bak' "s$dir/kaushik_replace_postgrespassword/$postgres_password/g" docker-compose.yml
 
 hasura_secret=""
 for i in `seq 1 $n`; do
@@ -18,7 +20,7 @@ done
 echo $hasura_secret
 
 # randomly generated 10 chars hasura secret
-sed -i '.bak' "s/kaushik_replace_myadminsecret/$hasura_secret/g" docker-compose.yml
+sed -i '.bak' "s$dir/kaushik_replace_myadminsecret/$hasura_secret/g" docker-compose.yml
 
 # Get the ip address
 IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
