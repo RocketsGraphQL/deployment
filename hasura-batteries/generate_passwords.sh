@@ -19,6 +19,9 @@ for i in `seq 1 $n`; do
 done
 echo $hasura_secret
 
+export HASURA_SECRET=${hasura_secret}
+export POSTGRES_PASSWORD=${postgres_password}
+
 # randomly generated 10 chars hasura secret
 sed -i "s/kaushik_replace_myadminsecret/$hasura_secret/g" "/tmp/deployment/hasura-batteries/docker-compose.yml"
 
