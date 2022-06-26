@@ -22,6 +22,9 @@ echo $hasura_secret
 # randomly generated 10 chars hasura secret
 sed -i "s/kaushik_replace_myadminsecret/$hasura_secret/g" "/tmp/deployment/hasura-batteries/docker-compose.yml"
 
+# Use this key in the bootstrap_hasura as well
+sed -i "s/myadminsecret/$hasura_secret/g" "/tmp/deployment/hasura-batteries/bootstrap_hasura.yml"
+
 # Get the ip address
 IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 # # GET the instance id
