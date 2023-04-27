@@ -3,7 +3,23 @@
 # Wait for the hasura to be up
 bash -c 'while [[ "$(curl http://localhost:8080/healthz)" != "OK" ]]; do sleep 5; done'
 
+# # Get the ip address
+IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+# GET the instance id
+INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+
+# # And then post it to the project state to finish setting up databases
+# curl -d '{
+#     "type": "FINISHED_BOOTING_HASURA"
+#     "instance_ip": "'$IP_ADDRESS'",
+#     "instance_id": "'$INSTANCE_ID'"
+# }
+# ' -H "Content-Type: application/json" \
+#   -X POST https://rocketgraph.io/metadata/project-state/
+
 # Connect DB
+# Modify this to be able to add AWS RDS as
+# backend database
 curl -d '{
   "type": "pg_add_source",
   "args": {
@@ -26,6 +42,33 @@ curl -d '{
   -H "X-Hasura-Role: admin" \
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v1/metadata
+
+# curl -d '{
+#   "type": "pg_add_source",
+#   "args": {
+#     "name": "postgres",
+#     "configuration": {
+#       "connection_info": {
+#         "database_url": {
+#           "name": "postgres",
+#           "password": "POSTGRESQL_PASSWORD",
+#           "database": "postgres",
+#           "host": "host",
+#           "port": "port"
+#         },
+#         "pool_settings": {
+#           "retries": 1,
+#           "idle_timeout": 180,
+#           "max_connections": 50
+#         }
+#       }
+#     }
+#   }
+# }
+# ' -H "Content-Type: application/json" \
+#   -H "X-Hasura-Role: admin" \
+#   -H "X-hasura-admin-secret: myadminsecretkey" \
+#   -X POST http://localhost:8080/v1/metadata
 
 # Create users table
 curl -d '
@@ -154,3 +197,21 @@ curl -d '
   -H "X-Hasura-Role: admin" \
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v1/metadata
+
+# And then post it to the project state to finish setting up databases
+curl -d '{
+    "type": "FINISHED_SETTING_UP_TABLES_AND_RELATIONSHIPS"
+    "instance_ip": "'$IP_ADDRESS'",
+    "instance_id": "'$INSTANCE_ID'"
+}
+' -H "Content-Type: application/json" \
+  -X POST https://rocketgraph.io/metadata/project-state/
+
+# And then post it to the project state to finish setting up databases
+curl -d '{
+    "type": "FINISHED_SETTING_UP_HASURA_BATTERIES"
+    "instance_ip": "'$IP_ADDRESS'",
+    "instance_id": "'$INSTANCE_ID'"
+}
+' -H "Content-Type: application/json" \
+  -X POST https://rocketgraph.io/metadata/project-state/
