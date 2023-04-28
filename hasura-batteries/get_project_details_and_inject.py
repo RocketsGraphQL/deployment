@@ -3,9 +3,11 @@ import requests
 from requests.exceptions import HTTPError
 
 FILENAME="docker-compose.yml"
+METADATA_URL="https://52b6-106-193-170-83.ngrok-free.app/metadata/project-state"
+# METADATA_URL=
 try:
     instance_id = sys.argv[1]
-    response = requests.get('http://rocketgraph.io/metadata/project-details', params={'instanceId': instance_id})
+    response = requests.get(METADATA_URL, params={'instanceId': instance_id})
     response.raise_for_status()
     # access JSOn content
     jsonResponse = response.json()

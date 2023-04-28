@@ -198,6 +198,8 @@ curl -d '
   -H "X-hasura-admin-secret: myadminsecretkey" \
   -X POST http://localhost:8080/v1/metadata
 
+METADATA_URL=https://52b6-106-193-170-83.ngrok-free.app/metadata/project-state
+# METADATA_URL=https://rocketgraph.io/metadata/project-state/
 # And then post it to the project state to finish setting up databases
 curl -d '{
     "type": "FINISHED_SETTING_UP_TABLES_AND_RELATIONSHIPS"
@@ -205,7 +207,7 @@ curl -d '{
     "instance_id": "'$INSTANCE_ID'"
 }
 ' -H "Content-Type: application/json" \
-  -X POST https://rocketgraph.io/metadata/project-state/
+  -X POST $METADATA_URL
 
 # And then post it to the project state to finish setting up databases
 curl -d '{
@@ -214,4 +216,4 @@ curl -d '{
     "instance_id": "'$INSTANCE_ID'"
 }
 ' -H "Content-Type: application/json" \
-  -X POST https://rocketgraph.io/metadata/project-state/
+  -X POST $METADATA_URL
