@@ -202,7 +202,7 @@ METADATA_URL=https://52b6-106-193-170-83.ngrok-free.app/metadata/project-state
 # METADATA_URL=https://rocketgraph.io/metadata/project-state/
 # And then post it to the project state to finish setting up databases
 curl -d '{
-    "type": "FINISHED_SETTING_UP_TABLES_AND_RELATIONSHIPS"
+    "type": "FINISHED_SETTING_UP_TABLES_AND_RELATIONSHIPS",
     "instance_ip": "'$IP_ADDRESS'",
     "instance_id": "'$INSTANCE_ID'"
 }
@@ -211,7 +211,7 @@ curl -d '{
 
 # And then post it to the project state to finish setting up databases
 curl -d '{
-    "type": "FINISHED_SETTING_UP_HASURA_BATTERIES"
+    "type": "FINISHED_SETTING_UP_HASURA_BATTERIES",
     "instance_ip": "'$IP_ADDRESS'",
     "instance_id": "'$INSTANCE_ID'"
 }
