@@ -2,7 +2,7 @@ import sys
 import requests
 from requests.exceptions import HTTPError
 
-FILENAME="docker-compose.yml"
+FILENAME="/tmp/deployment/hasura-batteries/docker-compose.yml"
 METADATA_URL="https://52b6-106-193-170-83.ngrok-free.app/metadata/project-details"
 # METADATA_URL=
 try:
