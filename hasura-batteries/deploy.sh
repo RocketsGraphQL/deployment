@@ -7,7 +7,7 @@ INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 # get instance region
 # INSTANCE_REGION=$(curl -s 'http://169.254.169.254/latest/dynamic/instance-identity/document' | python -c "import sys, json; print json.load(sys.stdin)['region']")
 
-METADATA_URL=https://c8b6-36-255-233-167.ngrok-free.app/metadata/project-state
+METADATA_URL=https://rocketgraph.io/metadata/project-state
 # Now post the metadata to Rocketgraph server to link
 # the instance with this id to the ip address we just fetched
 # And then post it to the project state to link both of them
