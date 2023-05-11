@@ -42,7 +42,7 @@ curl -d '{
 }
 ' -H "Content-Type: application/json" \
   -H "X-Hasura-Role: admin" \
-  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -H "X-hasura-admin-secret: kaushik_replace_hasura_secret" \
   -X POST http://localhost:8080/v1/metadata
 
 # curl -d '{
@@ -85,7 +85,7 @@ curl -d '
     }
 ' -H "Content-Type: application/json" \
   -H "X-Hasura-Role: admin" \
-  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -H "X-hasura-admin-secret: kaushik_replace_hasura_secret" \
   -X POST http://localhost:8080/v2/query
 
 # create providers table
@@ -104,7 +104,7 @@ curl -d '
     }
 ' -H "Content-Type: application/json" \
   -H "X-Hasura-Role: admin" \
-  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -H "X-hasura-admin-secret: kaushik_replace_hasura_secret" \
   -X POST http://localhost:8080/v2/query
 
 # Track table
@@ -128,7 +128,7 @@ curl -d '
     }
 ' -H "Content-Type: application/json" \
   -H "X-Hasura-Role: admin" \
-  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -H "X-hasura-admin-secret: kaushik_replace_hasura_secret" \
   -X POST http://localhost:8080/v1/metadata
 
 
@@ -153,7 +153,7 @@ curl -d '
     }
 ' -H "Content-Type: application/json" \
   -H "X-Hasura-Role: admin" \
-  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -H "X-hasura-admin-secret: kaushik_replace_hasura_secret" \
   -X POST http://localhost:8080/v1/metadata
 
 # Create array relationship
@@ -197,7 +197,7 @@ curl -d '
     }
 ' -H "Content-Type: application/json" \
   -H "X-Hasura-Role: admin" \
-  -H "X-hasura-admin-secret: myadminsecretkey" \
+  -H "X-hasura-admin-secret: kaushik_replace_hasura_secret" \
   -X POST http://localhost:8080/v1/metadata
 
 # METADATA_URL=https://rocketgraph.io/metadata/project-state/

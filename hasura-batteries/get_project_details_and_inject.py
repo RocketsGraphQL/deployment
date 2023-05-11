@@ -2,7 +2,9 @@ import sys
 import requests
 from requests.exceptions import HTTPError
 
-FILENAME="/tmp/deployment/hasura-batteries/docker-compose.yml"
+DOCKER_COMPOSE_FILENAME="/tmp/deployment/hasura-batteries/docker-compose.yml"
+BOOTSTRAP_HASURA_FILENAME="/tmp/deployment/hasura-batteries/bootstrap_hasura.sh"
+
 METADATA_URL="https://rocketgraph.io/metadata/project-details"
 # METADATA_URL=
 try:
@@ -14,8 +16,8 @@ try:
     postgres_password = jsonResponse['postgres_password']
     postgresql_endpoint = jsonResponse['postgresql_endpoint']
     hasura_secret = jsonResponse['hasura_secret']
-    #read input file
-    fin = open(FILENAME, "rt")
+    # read input file docker-compose
+    fin = open(DOCKER_COMPOSE_FILENAME, "rt")
     #read file contents to string
     data = fin.read()
     #replace all occurrences of the required string
@@ -27,11 +29,30 @@ try:
     #close the input file
     fin.close()
     #open the input file in write mode
-    fin = open(FILENAME, "wt")
+    fin = open(DOCKER_COMPOSE_FILENAME, "wt")
     #overrite the input file with the resulting data
     fin.write(data)
     #close the file
     fin.close()
+
+
+    # read input file bootstrap_hasura
+    fin = open(BOOTSTRAP_HASURA_FILENAME, "rt")
+    #read file contents to string
+    data = fin.read()
+    #replace all occurrences of the required string
+    data = data.replace('kaushik_replace_hasura_secret', hasura_secret)
+    # kaushik_replace_hasura_secret
+
+    #close the input file
+    fin.close()
+    #open the input file in write mode
+    fin = open(BOOTSTRAP_HASURA_FILENAME, "wt")
+    #overrite the input file with the resulting data
+    fin.write(data)
+    #close the file
+    fin.close()
+
 
 except HTTPError as http_err:
     print(f'HTTP error occurred: {http_err}')
