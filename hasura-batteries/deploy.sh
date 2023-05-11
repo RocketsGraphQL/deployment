@@ -20,7 +20,7 @@ curl -d '{
   -X POST $METADATA_URL
 
 
-python3 /tmp/deployment/hasura-batteries/get_project_details_and_inject.py $INSTANCE_ID
+sudo python3 /tmp/deployment/hasura-batteries/get_project_details_and_inject.py $INSTANCE_ID
 
 docker-compose -f /tmp/deployment/hasura-batteries/docker-compose.yml up -d
 /bin/bash /tmp/deployment/hasura-batteries/bootstrap_hasura.sh
