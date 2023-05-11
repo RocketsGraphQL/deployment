@@ -11,7 +11,7 @@ try:
     response.raise_for_status()
     # access JSOn content
     jsonResponse = response.json()
-    postgres_password = jsonResponse['postgresql_password']
+    postgres_password = jsonResponse['postgres_password']
     postgresql_endpoint = jsonResponse['postgresql_endpoint']
     hasura_secret = jsonResponse['hasura_secret']
     #read input file
