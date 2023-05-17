@@ -27,6 +27,8 @@ services:
     environment:
       HASURA_SECRET: kaushik_replace_hasura_secret
       POSTGRES_PASSWORD: kaushik_replace_postgres_password
+      REFRESH_TOKEN_SECRET: "If it is able to parse any of the above successfully, then it will use that parsed time to refresh/refetch the JWKs again. If it is unable to parse, then it will not refresh the JWKs"
+      ACCESS_TOKEN_SECRET: "If it is able to parse any of the above successfully, then it will use that parsed time to refresh/refetch the JWKs again. If it is unable to parse, then it will not refresh the JWKs"
     ports:
       - "8000:8000"
     depends_on:
