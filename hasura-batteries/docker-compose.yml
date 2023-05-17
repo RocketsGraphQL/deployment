@@ -28,7 +28,7 @@ services:
       HASURA_SECRET: kaushik_replace_hasura_secret
       POSTGRES_PASSWORD: kaushik_replace_postgres_password
     ports:
-      - "7000:7000"
+      - "8000:8000"
     depends_on:
       - "graphql-engine"
     links:
