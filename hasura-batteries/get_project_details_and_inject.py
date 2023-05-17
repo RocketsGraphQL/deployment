@@ -16,6 +16,7 @@ try:
     postgres_password = jsonResponse['postgres_password']
     postgresql_endpoint = jsonResponse['postgresql_endpoint']
     hasura_secret = jsonResponse['hasura_secret']
+    hasura_endpoint = jsonResponse['hasura_endpoint']+"/v1/graphql"
     # read input file docker-compose
     fin = open(DOCKER_COMPOSE_FILENAME, "rt")
     #read file contents to string
@@ -24,6 +25,7 @@ try:
     data = data.replace('kaushik_replace_postgres_password', postgres_password)
     data = data.replace('kaushik_replace_postgres_endpoint', postgresql_endpoint)
     data = data.replace('kaushik_replace_hasura_secret', hasura_secret)
+    data = data.replace('kaushik_replace_hasura_graphql_endpoint', hasura_endpoint)
     # kaushik_replace_hasura_secret
 
     #close the input file
